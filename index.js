@@ -8,8 +8,8 @@ const request = require('request-promise-native');
 const mongoHelper = require('./mongoDBHelper');
 
 app.use(express.static('public'));
-app.use(bodyParser.urlencoded({ extended: false }));
-app.use(bodyParser.json());
+app.use(express.urlencoded());
+app.use(express.json());
 
 
 
@@ -21,28 +21,18 @@ app.get('/', (req, res) => {
     })
 });
 
-
-app.get('/yo', (req, res) => {
-    res.send("yo man !!!");
+app.get('/hello', (req, res) => {
+    res.send("hello !!!!");
 });
 
-app.post('/getChannelID', async (req, res) => {
-    // ....CODE TO LOGIN USER
-    // Creating or login user into Rocket chat
-    try {
-        const response = await createOrLoginUser(user.username, user.firstName, user.email, user.password);
-        req.session.user = user;
-        // Saving the rocket.chat auth token and userId in the database
-        user.rocketchatAuthToken = response.data.authToken;
-        user.rocketchatUserId = response.data.userId;
-        await user.save();
-        res.send({message: 'Login Successful'});
-    } catch (ex) {
-        console.log('Rocket.chat login failed');
-    }
+app.post('/channel', async (req, res) => {
+    mongoHelper.insert({collection: 'nimble', data: req.body}).then(response => {
+        res.status(200);
+        res.send();
+    }).catch(err => {
+        res.status(400);
+        res.send()
+    })
 });
-
-
-
 
 app.listen(port, () => console.log(`Example app listening on port ${port}!`))
