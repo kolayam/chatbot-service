@@ -1,0 +1,27 @@
+{
+  "name": "chatbot-service",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js",
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "debug": "node --inspect --inspect-brk -r dotenv/config node_modules/hubot/bin/hubot.js -a rocketchat",
+    "shell": "node -r dotenv/config node_modules/hubot/bin/hubot.js -a shell",
+    "local": "node -r dotenv/config node_modules/hubot/bin/hubot.js -a rocketchat"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "asyncawait": "^1.0.8",
+    "axios": "^0.18.0",
+    "body-parser": "^1.18.2",
+    "express": "^4.16.4",
+    "mongodb": "^3.2.7",
+    "request": "^2.88.0",
+    "request-promise-native": "^1.0.7",
+    "coffeescript": "^2.2.2",
+    "hubot": "3",
+    "hubot-rocketchat": "rocketchat/hubot-rocketchat"
+  }
+}

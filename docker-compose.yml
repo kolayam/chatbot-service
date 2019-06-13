@@ -1,0 +1,29 @@
+version: '2'
+
+services:
+  mongo:
+    image: mongo:3.2
+    volumes:
+      - ./data/db:/data/db
+      #- ./data/dump:/dump
+    command: mongod --smallfiles --oplogSize 128 --replSet rs0
+#    ports:
+#      - 27017:27017
+    networks:
+      - mongo
+
+  chat:
+    build:
+      context: .
+      dockerfile: ./Dockerfile
+    image: chatservice
+    ports:
+      - 8095:8090
+    networks:
+      - mongo
+    depends_on:
+      - mongo
+
+networks:
+  mongo:
+    external: true
