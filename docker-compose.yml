@@ -44,7 +44,7 @@ services:
       dockerfile: ./Dockerfile
     image: chatservice
     ports:
-      - 8095:8090
+      - 8095:8095
     networks:
       - mongo
     depends_on:
