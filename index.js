@@ -44,7 +44,7 @@ app.post('/channel', async (req, res) => {
 });
 
 app.post('/channels', async (req, res) => {
-    console.log("request received to search for channels: " + req.body);
+    console.log("request received to search for channels: " + JSON.stringify(req.body));
     let channelData = {};
     let initiatingPartyID = req.body.initiatingPartyID;
     let respondingPartyID = req.body.respondingPartyID;
