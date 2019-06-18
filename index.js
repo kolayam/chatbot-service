@@ -25,6 +25,13 @@ app.get('/hello', (req, res) => {
     res.send("hello !!!!");
 });
 
+app.get('/dropC', (req, res) => {
+
+    mongoHelper.dropCollection({collection: 'nimble'});
+    res.send("dropped !!!!");
+});
+
+
 app.post('/channel', async (req, res) => {
     console.log("request received to search for create channel: " + req.body);
     mongoHelper.insert({collection: 'nimble', data: req.body}).then(response => {
