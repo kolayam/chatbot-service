@@ -1,0 +1,97 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  namespace: nimble-platform
+  labels:
+    app: rocketchat
+  name: rocketchat
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: rocketchat
+  template:
+    metadata:
+      labels:
+        app: rocketchat
+    spec:
+      imagePullSecrets:
+      - name: do-registry
+      containers:
+      - env:
+        - name: PORT
+          value: "3000"
+        - name: ROOT_URL
+          value: http://localhost:3000
+        - name: MONGO_URL
+          value: "mongodb://doadmin:5t10ghP84Vp92sN6@db-mongodb-kolanot-12798e8c.mongo.ondigitalocean.com/rocketchat"
+        - name: MONGO_OPLOG_URL
+          value: "mongodb://doadmin:5t10ghP84Vp92sN6@db-mongodb-kolanot-12798e8c.mongo.ondigitalocean.com/oplog"
+        image: rocket.chat:latest
+        imagePullPolicy: Always
+        name: rocketchat
+        ports:
+        - containerPort: 3000
+      restartPolicy: Always
+
+---
+
+apiVersion: v1
+kind: Service
+metadata:
+  namespace: nimble-platform
+  labels:
+    app: rocketchat
+  name: rocketchat
+spec:
+  ports:
+  - name: http
+    port: 3000
+    targetPort: 3000
+  selector:
+    app: rocketchat
+
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  namespace: nimble-platform
+  labels:
+    app: chat-service
+  name: chat-service
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: chat-service
+  template:
+    metadata:
+      labels:
+        app: chat-service
+    spec:
+      imagePullSecrets:
+      - name: do-registry
+      containers:
+      - image: registry.digitalocean.com/nimble/chat-service:1.0
+        imagePullPolicy: Always
+        name: chat-service
+        ports:
+        - containerPort: 8095
+      restartPolicy: Always
+
+---
+
+apiVersion: v1
+kind: Service
+metadata:
+  namespace: nimble-platform
+  labels:
+    app: chat-service
+  name: chat-service
+spec:
+  ports:
+  - name: http
+    port: 8095
+    targetPort: 8095
+  selector:
+    app: chat-service
