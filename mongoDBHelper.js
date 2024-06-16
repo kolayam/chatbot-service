@@ -1,6 +1,6 @@
 const MongoClient = require('mongodb').MongoClient;
-const dbName = "local";
-const url = 'mongodb://mongo:27017/' + dbName;
+const dbName = "rocketchat-oplog";
+const url = 'mongodb://doadmin:5t10ghP84Vp92sN6@db-mongodb-kolanot-12798e8c.mongo.ondigitalocean.com/rocketchat-oplog?authSource=admin';
 const dbService = {
 
     /**
