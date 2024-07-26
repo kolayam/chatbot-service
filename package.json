@@ -14,14 +14,14 @@
   "license": "ISC",
   "dependencies": {
     "asyncawait": "^1.0.8",
-    "axios": "^0.18.0",
+    "axios": "^0.21.1",
     "body-parser": "^1.18.2",
+    "coffeescript": "^2.2.2",
     "express": "^4.16.4",
+    "hubot": "3",
+    "hubot-rocketchat": "rocketchat/hubot-rocketchat",
     "mongodb": "^3.2.7",
     "request": "^2.88.0",
-    "request-promise-native": "^1.0.7",
-    "coffeescript": "^2.2.2",
-    "hubot": "3",
-    "hubot-rocketchat": "rocketchat/hubot-rocketchat"
+    "request-promise-native": "^1.0.7"
   }
 }
