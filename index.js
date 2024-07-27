@@ -1,14 +1,10 @@
 const express = require('express')
 const app = express();
 const port = 8095;
-var axios = require('axios');
-var fs = require('fs');
-var bodyParser = require('body-parser');
-const request = require('request-promise-native');
 const mongoHelper = require('./mongoDBHelper');
 
 app.use(express.static('public'));
-app.use(express.urlencoded());
+app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
 
